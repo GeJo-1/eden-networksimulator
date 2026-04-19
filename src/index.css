@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --neon-cyan: #22d3ee;
+  --neon-green: #10b981;
+  --neon-red: #ef4444;
+  --glass-bg: rgba(17, 24, 39, 0.7);
+}
+
+body {
+  /* Note: Tailwind's 'antialiased' class applies the crisp font smoothing automatically! */
+  @apply bg-slate-50 text-slate-900 antialiased selection:bg-cyan-500/30 transition-colors duration-500;
+  
+  /* Global Font Enforcement */
+  font-family: 'Inter', sans-serif;
+}
+
+/* Subtle moving mesh background - Scoped ONLY to dark mode so light mode stays clean! */
+.dark body {
+  @apply bg-gray-950 text-gray-100;
+  background: radial-gradient(circle at 50% 50%, #111827 0%, #000000 100%);
+}
+
+@layer components {
+  .glass-panel {
+    @apply bg-opacity-70 backdrop-blur-md border border-white/10 shadow-2xl;
+    background-color: var(--glass-bg);
+  }
+
+  .neon-text-cyan {
+    text-shadow: 0 0 10px rgba(34, 211, 238, 0.5), 0 0 20px rgba(34, 211, 238, 0.3);
+  }
+
+  .neon-border-cyan {
+    box-shadow: 0 0 15px rgba(34, 211, 238, 0.4), inset 0 0 5px rgba(34, 211, 238, 0.2);
+  }
+}
+
+/* Data Packet Pulse Animation for X-Ray Mode */
+@keyframes data-pulse {
+  0% { transform: translateY(0); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateY(-100px); opacity: 0; }
+}
+
+.animate-data-flow {
+  animation: data-pulse 0.8s ease-in-out infinite;
+}
+
+/* --- THE MAGICAL VIEW TRANSITION FADE --- */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.6s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}

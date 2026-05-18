@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://Gejo-1.github.io/eden-terminus/",
+  "homepage": "https://GeJo-1.github.io/eden-networksimulator/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

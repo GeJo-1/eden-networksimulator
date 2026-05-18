@@ -6,7 +6,6 @@ import { STANDARDS } from '../../constants/networkData';
 const MotionDiv = motion.div;
 const MotionButton = motion.button;
 
-// Perfectly tuned physics.
 const springTransition = { type: 'spring', stiffness: 180, damping: 24, mass: 0.8 };
 const wirePhysics = { type: 'spring', stiffness: 220, damping: 26, mass: 0.8 };
 

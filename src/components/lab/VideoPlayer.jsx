@@ -1,26 +1,26 @@
-// src/components/lab/VideoPlayer.jsx
 import React, { useMemo } from 'react';
 
+import keystoneVid from '../../assets/videos/keystone.webm';
+import crossoverVid from '../../assets/videos/crossover.webm';
+import t568aVid from '../../assets/videos/t568a.webm';
+import t568bVid from '../../assets/videos/t568b.webm';
+
 export default function VideoPlayer({ state }) {
-  // 1. Pull hardwareType from state
   const { activeStandard, cableType, activeMode, hardwareType } = state;
 
-  // Dynamically determine which video to play based on the simulator's state
   const currentVideo = useMemo(() => {
-    // 2. Prioritize the Keystone video if that hardware is active
     if (hardwareType === 'keystone') {
-      return { src: '/videos/keystone.mp4', title: 'Keystone Jack Punch-Down' };
+      return { src: keystoneVid, title: 'Keystone Jack Punch-Down' };
     }
     if (cableType === 'crossover') {
-      return { src: '/videos/crossover.mp4', title: 'Crossover Link Wiring' };
+      return { src: crossoverVid, title: 'Crossover Link Wiring' };
     }
     if (activeStandard === 'T568A') {
-      return { src: '/videos/t568a.mp4', title: 'T568A Termination Guide' };
+      return { src: t568aVid, title: 'T568A Termination Guide' };
     }
-    return { src: '/videos/t568b.mp4', title: 'T568B Termination Guide' };
-  }, [activeStandard, cableType, hardwareType]); // 3. Add hardwareType to dependencies
+    return { src: t568bVid, title: 'T568B Termination Guide' };
+  }, [activeStandard, cableType, hardwareType]); 
 
-  // Hide the video player if the user is taking an Exam!
   if (activeMode === 'exam') {
     return (
       <div className="bg-slate-100 dark:bg-gray-900 rounded-lg p-4 border border-red-300 dark:border-red-900 shadow-inner flex flex-col items-center justify-center h-48 transition-colors duration-500">
@@ -40,14 +40,13 @@ export default function VideoPlayer({ state }) {
       </h2>
       
       <div className="relative rounded overflow-hidden border border-slate-300 dark:border-gray-800 bg-slate-200 dark:bg-black aspect-video shadow-inner dark:shadow-none transition-colors">
-        {/* The key attribute forces React to reload the video element when the source changes */}
         <video 
           key={currentVideo.src} 
           controls 
           className="w-full h-full object-cover"
           preload="metadata"
         >
-          <source src={currentVideo.src} type="video/mp4" />
+          <source src={currentVideo.src} type="video/webm" />
           Your browser does not support the video tag.
         </video>
       </div>

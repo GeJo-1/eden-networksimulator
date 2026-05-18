@@ -1,10 +1,8 @@
-// src/components/layout/LandingPage.jsx
 import React, { useState } from 'react';
 
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
 
-// --- Static Animation Variants ---
 const containerVariants = {
   hidden: { opacity: 0 },
   show: {
@@ -19,11 +17,9 @@ const itemVariants = {
 };
 
 export default function LandingPage({ onEnter }) {
-  // --- NEW: Parallax Mouse Tracking ---
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
   const handleMouseMove = (e) => {
-    // Normalize mouse position to range between -1 and 1 for smooth parallax math
     const x = (e.clientX / window.innerWidth) * 2 - 1;
     const y = (e.clientY / window.innerHeight) * 2 - 1;
     setMousePos({ x, y });
@@ -35,15 +31,12 @@ export default function LandingPage({ onEnter }) {
       className="h-[100dvh] w-full bg-gray-950 flex flex-col items-center justify-between p-4 sm:p-8 relative overflow-hidden font-sans"
     >
       
-      {/* --- NEW: CRT Scanlines & Vignette Overlay --- */}
       <div className="absolute inset-0 pointer-events-none z-50 bg-[repeating-linear-gradient(0deg,transparent,transparent_1px,rgba(0,0,0,0.15)_1px,rgba(0,0,0,0.15)_2px)] opacity-50"></div>
       <div className="absolute inset-0 pointer-events-none z-50 shadow-[inset_0_0_150px_rgba(0,0,0,0.9)]"></div>
 
-      {/* --- THE INFINITE 3D FLOOR (Now with Parallax!) --- */}
       <motion.div 
         className="absolute inset-0 pointer-events-none z-0 overflow-hidden" 
         style={{ perspective: '1000px' }}
-        // The background shifts slightly in the direction of the mouse
         animate={{ x: mousePos.x * -15, y: mousePos.y * -15 }}
         transition={{ type: "spring", stiffness: 50, damping: 30 }}
       >

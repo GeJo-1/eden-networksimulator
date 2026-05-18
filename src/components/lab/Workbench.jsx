@@ -1,4 +1,3 @@
-// src/components/lab/Workbench.jsx
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import VideoPlayer from './VideoPlayer'; 
@@ -25,7 +24,6 @@ export default function Workbench({ state, setters, actions }) {
   const isExam = activeMode === 'exam' || activeScenario;
   const isDangerTime = isExam && examTime > 0 && examTime <= 15;
 
-  // THE FIX: Reset Crossover if they switch to Keystone
   const toggleHardware = (type) => {
     if (isExam) return; 
     setHardwareType(type);
@@ -80,7 +78,6 @@ export default function Workbench({ state, setters, actions }) {
         <VideoPlayer state={state} />
       </div>
 
-      {/* --- INDUSTRIAL HARDWARE CONFIGURATOR (HIGH CONTRAST) --- */}
       <div className="bg-white dark:bg-[#1a1d24] rounded-lg p-2.5 xl:p-3 border border-slate-300 dark:border-transparent border-b-4 border-b-slate-400 dark:border-b-[#15181c] shadow-sm dark:shadow-lg shrink-0 flex flex-col gap-2 transition-colors">
         <h2 className="text-[10px] xl:text-xs uppercase tracking-[0.15em] font-black text-slate-700 dark:text-gray-400 flex items-center gap-2">
           <div className="w-2 h-2 rounded-full bg-cyan-600 dark:bg-cyan-500 shadow-[0_0_5px_#0891b2] dark:shadow-[0_0_5px_#06b6d4]"></div>

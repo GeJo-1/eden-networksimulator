@@ -1,25 +1,27 @@
 import React, { useMemo } from 'react';
 
-import keystoneVid from '../../assets/videos/keystone.webm';
-import crossoverVid from '../../assets/videos/crossover.webm';
-import t568aVid from '../../assets/videos/t568a.webm';
-import t568bVid from '../../assets/videos/t568b.webm';
+const VIDEOS = {
+  keystone: 'https://res.cloudinary.com/dy0k9rsy4/video/upload/v1779204048/KEYSTONE_vfyijo.mp4',
+  crossover: 'https://res.cloudinary.com/dy0k9rsy4/video/upload/v1779202778/CROSSOVER_fhxpxs.mp4',
+  t568a:    'https://res.cloudinary.com/dy0k9rsy4/video/upload/v1779203587/T568A_jrwyvy.mp4',
+  t568b:    'https://res.cloudinary.com/dy0k9rsy4/video/upload/v1779204353/T568B_srhgh6.mp4',
+};
 
 export default function VideoPlayer({ state }) {
   const { activeStandard, cableType, activeMode, hardwareType } = state;
 
   const currentVideo = useMemo(() => {
     if (hardwareType === 'keystone') {
-      return { src: keystoneVid, title: 'Keystone Jack Punch-Down' };
+      return { src: VIDEOS.keystone, title: 'Keystone Jack Punch-Down' };
     }
     if (cableType === 'crossover') {
-      return { src: crossoverVid, title: 'Crossover Link Wiring' };
+      return { src: VIDEOS.crossover, title: 'Crossover Link Wiring' };
     }
     if (activeStandard === 'T568A') {
-      return { src: t568aVid, title: 'T568A Termination Guide' };
+      return { src: VIDEOS.t568a, title: 'T568A Termination Guide' };
     }
-    return { src: t568bVid, title: 'T568B Termination Guide' };
-  }, [activeStandard, cableType, hardwareType]); 
+    return { src: VIDEOS.t568b, title: 'T568B Termination Guide' };
+  }, [activeStandard, cableType, hardwareType]);
 
   if (activeMode === 'exam') {
     return (
@@ -40,13 +42,13 @@ export default function VideoPlayer({ state }) {
       </h2>
       
       <div className="relative rounded overflow-hidden border border-slate-300 dark:border-gray-800 bg-slate-200 dark:bg-black aspect-video shadow-inner dark:shadow-none transition-colors">
-        <video 
-          key={currentVideo.src} 
-          controls 
+        <video
+          key={currentVideo.src}
+          controls
           className="w-full h-full object-cover"
           preload="metadata"
         >
-          <source src={currentVideo.src} type="video/webm" />
+          <source src={currentVideo.src} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
       </div>
